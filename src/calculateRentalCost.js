@@ -7,17 +7,21 @@ function calculateRentalCost(days) {
   const DAILY_FEE = 40;
   const totalCost = days * DAILY_FEE;
 
-  // discounts based on rented days [min day : discount amount]
-  const daysDiscount = {
-    3: 20,
-    7: 50,
-  };
+  const DISCOUNT_LVL1 = 20;
+  const DISCOUNT_LV1_DAYS = 3;
 
-  // find the maximum applicable discount
-  const discount =
-    daysDiscount[Object.keys(daysDiscount).findLast((dd) => days >= dd)] || 0;
+  const DISCOUNT_LVL2 = 50;
+  const DISCOUNT_LV2_DAYS = 7;
 
-  return totalCost - discount;
+  if (days >= DISCOUNT_LV2_DAYS) {
+    return totalCost - DISCOUNT_LVL2;
+  }
+
+  if (days >= DISCOUNT_LV1_DAYS) {
+    return totalCost - DISCOUNT_LVL1;
+  }
+
+  return totalCost;
 }
 
 module.exports = calculateRentalCost;
